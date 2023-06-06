@@ -15,11 +15,11 @@ class LinkedList {
     if (this.size === 0) {
       this.head = node;
     } else {
-      let n = this.head;
-      while (n.next) {
-        n = n.next;
+      let prev = this.head;
+      while (prev.next) {
+        prev = prev.next;
       }
-      n.next = node;
+      prev.next = node;
     }
     this.size++;
   }
@@ -41,74 +41,76 @@ class LinkedList {
   }
 
   tail() {
-    let n = this.head;
-    while (n.next) {
-      n = n.next;
+    let prev = this.head;
+    while (prev.next) {
+      prev = prev.next;
     }
-    return n;
+    return prev;
   }
 
   atIndex(index) {
-    let n = this.head;
+    let prev = this.head;
     if (index < this.size) {
       for (let i = 0; i < index; i++) {
-        n = n.next;
+        prev = prev.next;
       }
-      return n;
+      return prev;
     }
     return "That index is larger than the list";
   }
 
   pop() {
-    let n = this.head;
+    let prev = this.head;
     for (let i = 2; i < this.size; i++) {
-      n = n.next;
+      prev = prev.next;
     }
-    n.next = null;
+    prev.next = null;
     this.size--;
   }
 
   contains(variable) {
-    let n = this.head;
-    for (let i = 2; i <= this.size; i++) {
-      if (n.value === variable) {
-        return true;
-      } else return false;
-      n = n.next;
+    let prev = this.head;
+    let bullion;
+    for (let i = 1; i < this.size; i++) {
+      if (prev.value === variable) {
+        bullion = true;
+      } else bullion = false;
+      prev = prev.next;
     }
+    return bullion;
   }
 
   find(variable) {
-    let n = this.head;
+    let prev = this.head;
     let index = 0;
-    for (let i = 2; i <= this.size; i++) {
-      if (n.value === variable) {
+    for (let i = 1; i <= this.size; i++) {
+      if (prev.value === variable) {
         return index;
       }
-      n = n.next;
+      prev = prev.next;
       index++;
     }
   }
 
   toString() {
-    let n = this.head;
+    let prev = this.head;
     let string = "";
-    for (let i = 2; i <= this.size; i++) {
-      string += "(" + n.value + ") => ";
-      n = n.next;
+    for (let i = 1; i <= this.size; i++) {
+      string += "(" + prev.value + ") => ";
+      prev = prev.next;
     }
+    string += "null";
     return string;
   }
 }
 
 let newList = new LinkedList();
-console.log(newList);
 newList.append("A");
-console.log(newList.head);
 newList.append("B");
 newList.append("C");
-console.log(newList.size);
+console.log(newList.toString());
 console.log(newList);
+console.log(newList.size);
 console.log(newList.contains("B"));
 console.log(newList.find("B"));
 console.log(newList.toString());
@@ -117,7 +119,8 @@ console.log(newList.tail());
 console.log(newList.atIndex(1));
 console.log(newList.atIndex(2));
 console.log(newList.atIndex(8));
-console.log(newList);
 newList.pop();
+console.log(newList);
+
 console.log(newList);
 console.log(newList.tail());
