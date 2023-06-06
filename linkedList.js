@@ -10,6 +10,7 @@ class LinkedList {
     this.head = null;
     this.size = 0;
   }
+
   append(value) {
     let node = new Node(value);
     if (this.size === 0) {
